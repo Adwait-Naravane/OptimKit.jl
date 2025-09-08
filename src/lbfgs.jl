@@ -199,7 +199,7 @@ function optimize(fg, x, alg::LBFGS;
             @warn @sprintf("LBFGS: not converged to requested tol after %d iterations and time %.2f s: f = %.12f, ‖∇f‖ = %.4e",
                            numiter, t, f, normgrad)
     end
-    history = [fhistory normgradhistory]
+    history = [fhistory normgradhistory alphahistory]
     return x, f, g, numfg, history
 end
 
