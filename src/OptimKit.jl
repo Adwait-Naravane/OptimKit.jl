@@ -23,7 +23,7 @@ _scale!(v, α) = scale!!(v, α)
 _add!(vdst, vsrc, α) = add!!(vdst, vsrc, α)
 
 _precondition(x, g) = deepcopy(g)
-_finalize!(x, f, g, numiter) = x, f, g
+_finalize!(x, f, g, numiter, fhistory, normgradhistory, alphahistory) = x, f, g
 
 # Default structs for new convergence and termination keywords
 @kwdef struct DefaultHasConverged{T<:Real}

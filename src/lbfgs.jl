@@ -69,6 +69,7 @@ function optimize(fg, x, alg::LBFGS;
     innergg = inner(x, g, g)
     normgrad = sqrt(innergg)
     fhistory = [f]
+    alphahistory = Float64[]
     normgradhistory = [normgrad]
     t = time() - t₀
     _hasconverged = hasconverged(x, f, g, normgrad)
@@ -111,7 +112,8 @@ function optimize(fg, x, alg::LBFGS;
                                             retract=retract, inner=inner)
         numfg += nfg
         numiter += 1
-        x, f, g = finalize!(x, f, g, numiter)
+        push!(alphahistory, α)
+        x, f, g = finalize!(x, f, g, numiter, fhistory, normgradhistory, alphahistory)
         innergg = inner(x, g, g)
         normgrad = sqrt(innergg)
         push!(fhistory, f)
